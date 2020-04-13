@@ -36,4 +36,5 @@ text_calendar = ""
 add_text = "0"
 
 for tag in soup.find_all("rect", "day"):
-    print("{0}: {1} - {2}".format(tag.name, tag.text, tag))
+    #print("{0}: {1} - {2}".format(tag.name, tag.text, tag))
+    print("Date: {0}, Count: {1}".format(tag["data-date"], tag["data-count"]))
