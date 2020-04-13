@@ -5,7 +5,7 @@ import requests as req
 
 username = "DreamerDeLy"
 
-resp = req.get("https://github.com/" + username + "?tab=overview&from=2020-01-01&to=2020-12-01")
+resp = req.get("https://github.com/" + username + "?tab=overview&from=2020-01-01&to=2020-12-31")
 soup = BeautifulSoup(resp.text, 'lxml')
 
 print("read page: \"" + soup.title.text + "\"")
