@@ -31,3 +31,9 @@ print("\nAnalitics:")
 print("Commits per day: \t" + str(round(commits_per_day, 2)))
 print("Commits forecast: \t" + str(round(commits_year_forecast)))
 
+
+text_calendar = "" 
+add_text = "0"
+
+for tag in soup.find_all("rect", "day"):
+    print("{0}: {1} - {2}".format(tag.name, tag.text, tag))
