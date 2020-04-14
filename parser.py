@@ -3,9 +3,7 @@
 from bs4 import BeautifulSoup
 import requests as req
 
-import datetime 
-from datetime import date
-from datetime import datetime
+from datetime import date, datetime
 
 username = "DreamerDeLy"
 year = "2020"
@@ -23,12 +21,12 @@ commits = int(text.split()[0])
 day_number = 0
 
 d0 = date(int(year), 1, 1)
-d1 = date.today()
+today = date.today()
 
-if (d1.year != int(year)):
+if (today.year != int(year)):
 	day_number = 365
 else:
-	day_number_1 = d1 - d0
+	day_number_1 = today - d0
 	day_number = day_number_1.days
 
 commits_per_day = commits / day_number
@@ -96,12 +94,11 @@ days_without_commits = day_number - days_with_commits
 
 # ------------------------------------------------------------------------------
 
-
 months = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 for i in range(len(dates)):
-	date = datetime.strptime(dates[i], '%Y-%m-%d')
-	m = date.month
+	dt = datetime.strptime(dates[i], '%Y-%m-%d')
+	m = dt.month
 	months[m-1] += int(counts[i])
 
 months_max = 0
@@ -109,6 +106,14 @@ months_max = 0
 for m in months:
 	if m > months_max: 
 		months_max = m
+
+# ------------------------------------------------------------------------------
+
+month_start = date(today.year, today.month, 1)
+month_day_number = (today - month_start).days + 1
+month_forecast = (months[int(today.month-1)]/month_day_number)*30
+
+# ------------------------------------------------------------------------------
 
 months_percent = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 months_name = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
@@ -119,10 +124,15 @@ months_p = months_max / 50
 for i in range(len(months)):
 	months_percent[i] = int(months[i] / months_p)
 
+month_forecast_percent = int(month_forecast / months_p)
+
 for i in range(len(months)):
 	mounts_percent_string += "" + months_name[i] + " "
-	for i in range(months_percent[i]):
+	for x in range(months_percent[i]):
 		mounts_percent_string += "■"
+	if (i == (today.month - 1)) & (int(year) == today.year):
+		for x in range(month_forecast_percent - months_percent[i]):
+			mounts_percent_string += "□"
 	mounts_percent_string += "\n"
 
 mounts_percent_string = mounts_percent_string[0:-1]
