@@ -3,6 +3,10 @@
 from bs4 import BeautifulSoup
 import requests as req
 
+import datetime 
+from datetime import date
+from datetime import datetime
+
 username = "DreamerDeLy"
 year = "2020"
 
@@ -18,7 +22,6 @@ commits = int(text.split()[0])
 
 day_number = 0
 
-from datetime import date
 d0 = date(int(year), 1, 1)
 d1 = date.today()
 
@@ -93,6 +96,39 @@ days_without_commits = day_number - days_with_commits
 
 # ------------------------------------------------------------------------------
 
+
+months = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+for i in range(len(dates)):
+	date = datetime.strptime(dates[i], '%Y-%m-%d')
+	m = date.month
+	months[m-1] += int(counts[i])
+
+months_max = 0
+
+for m in months:
+	if m > months_max: 
+		months_max = m
+
+months_percent = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+months_name = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+mounts_percent_string = ""
+
+months_p = months_max / 50
+
+for i in range(len(months)):
+	months_percent[i] = int(months[i] / months_p)
+
+for i in range(len(months)):
+	mounts_percent_string += "" + months_name[i] + " "
+	for i in range(months_percent[i]):
+		mounts_percent_string += "■"
+	mounts_percent_string += "\n"
+
+mounts_percent_string = mounts_percent_string[0:-1]
+
+# ------------------------------------------------------------------------------
+
 print("\nANALITICS")
 print("Commits per year: \t"+str(commits))
 print("---")
@@ -104,5 +140,9 @@ print("Days without commits: \t{0} ({1}%)".format(days_without_commits, round((d
 print("---")
 print("Commits per day: \t" + str(round(commits_per_day, 2)))
 print("Commits forecast: \t" + str(round(commits_year_forecast)))
+print("---")
+print("Commits per months:")
+print(mounts_percent_string)
+print("---")
 print("\n")
 
