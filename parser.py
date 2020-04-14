@@ -28,8 +28,6 @@ else:
 	day_number_1 = d1 - d0
 	day_number = day_number_1.days
 
-print("dn:"+str(day_number))
-
 commits_per_day = commits / day_number
 commits_year_forecast = commits_per_day * 365
 
@@ -83,11 +81,26 @@ for i in range(len(dates)):
 
 # ------------------------------------------------------------------------------
 
+days_with_commits = 0
+
+for i in range(len(dates)):
+	commits_ = int(counts[i]) 
+
+	if commits_ > 0:
+		days_with_commits = days_with_commits + 1
+
+days_without_commits = day_number - days_with_commits
+
+# ------------------------------------------------------------------------------
+
 print("\nANALITICS")
 print("Commits per year: \t"+str(commits))
 print("---")
 print("Max commits per day: \t{0} ({1})".format(commits_max, commits_max_day))
-print("Longest streak: \t{0} ({1})".format(str(longest_streak), str(longest_streak_date)))
+print("Longest streak: \t{0} ({1})".format(longest_streak, longest_streak_date))
+print("---")
+print("Days with commits: \t{0} ({1}%)".format(days_with_commits, round((days_with_commits/day_number)*100, 2)))
+print("Days without commits: \t{0} ({1}%)".format(days_without_commits, round((days_without_commits/day_number)*100, 2)))
 print("---")
 print("Commits per day: \t" + str(round(commits_per_day, 2)))
 print("Commits forecast: \t" + str(round(commits_year_forecast)))
