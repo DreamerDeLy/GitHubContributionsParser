@@ -16,11 +16,19 @@ commits = int(text.split()[0])
 
 # ------------------------------------------------------------------------------
 
+day_number = 0
+
 from datetime import date
 d0 = date(int(year), 1, 1)
 d1 = date.today()
-day_number_1 = d1 - d0
-day_number = day_number_1.days
+
+if (d1.year != int(year)):
+	day_number = 365
+else:
+	day_number_1 = d1 - d0
+	day_number = day_number_1.days
+
+print("dn:"+str(day_number))
 
 commits_per_day = commits / day_number
 commits_year_forecast = commits_per_day * 365
@@ -72,8 +80,6 @@ for i in range(len(dates)):
 			longest_streak_date = str(dates[i])
 			current_streak = 0
 		current_streak = 0
-
-
 
 # ------------------------------------------------------------------------------
 
