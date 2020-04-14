@@ -119,27 +119,37 @@ months_percent = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 months_name = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 mounts_percent_string = ""
 
-months_p = months_max / 50
+months_p = 50
+
+months_max_graph = months_max
+if (month_forecast > months_max_graph) & (int(year) == today.year):
+	months_max_graph = month_forecast
 
 for i in range(len(months)):
-	months_percent[i] = int(months[i] / months_p)
+	months_percent[i] = months[i] / months_max_graph
 
-month_forecast_percent = int(month_forecast / months_p)
+month_forecast_percent = month_forecast / months_max_graph
 
 for i in range(len(months)):
 	mounts_percent_string += "" + months_name[i] + " "
-	for x in range(months_percent[i]):
+
+	for x in range(int(months_percent[i]*months_p)):
 		mounts_percent_string += "■"
+	
 	if (i == (today.month - 1)) & (int(year) == today.year):
-		for x in range(month_forecast_percent - months_percent[i]):
+		for x in range(int((month_forecast_percent - months_percent[i])*months_p)):
 			mounts_percent_string += "□"
+	
+	if months[i] > 0:
+		mounts_percent_string += " [" + str(months[i]) + "]"
+
 	mounts_percent_string += "\n"
 
 mounts_percent_string = mounts_percent_string[0:-1]
 
 # ------------------------------------------------------------------------------
 
-print("\nANALITICS")
+print("\nANALITYCS")
 print("Commits per year: \t"+str(commits))
 print("---")
 print("Max commits per day: \t{0} ({1})".format(commits_max, commits_max_day))
