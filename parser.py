@@ -54,10 +54,34 @@ for i in range(len(dates)):
 
 # ------------------------------------------------------------------------------
 
-print("\nAnalitics:")
+current_streak = 0
+longest_streak = 0
+longest_streak_date = ""
+
+for i in range(len(dates)):
+	commits_ = int(counts[i]) 
+
+	if commits_ > 0:
+		current_streak = current_streak + 1
+	else:
+		if current_streak > longest_streak:
+			#print("st:"+str(current_streak))
+			#print("dt:"+str(dates[i]))
+			longest_streak = current_streak
+			longest_streak_date = str(dates[i])
+			current_streak = 0
+		current_streak = 0
+
+
+
+# ------------------------------------------------------------------------------
+
+print("\nANALITICS")
 print("Commits per year: \t"+str(commits))
-print("Max commits: {0} ({1})".format(commits_max, commits_max_day))
-print("\n")
+print("---")
+print("Max commits per day: \t{0} ({1})".format(commits_max, commits_max_day))
+print("Longest streak: \t{0} ({1})".format(str(longest_streak), str(longest_streak_date)))
+print("---")
 print("Commits per day: \t" + str(round(commits_per_day, 2)))
 print("Commits forecast: \t" + str(round(commits_year_forecast)))
 print("\n")
