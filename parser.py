@@ -30,11 +30,18 @@ commits_year_forecast = commits_per_day * 365
 print("\nAnalitics:")
 print("Commits per day: \t" + str(round(commits_per_day, 2)))
 print("Commits forecast: \t" + str(round(commits_year_forecast)))
-
+print("\n")
 
 text_calendar = "" 
 add_text = "0"
 
+dates = []
+counts = []
+
 for tag in soup.find_all("rect", "day"):
-    #print("{0}: {1} - {2}".format(tag.name, tag.text, tag))
-    print("Date: {0}, Count: {1}".format(tag["data-date"], tag["data-count"]))
+	#print("Date: {0}, Count: {1}".format(tag["data-date"], tag["data-count"]))
+	dates.append(tag["data-date"])
+	counts.append(tag["data-count"])
+
+for i in range(len(dates)):
+	print("Date: {0}, Count: {1}".format(dates[i], counts[i]))
