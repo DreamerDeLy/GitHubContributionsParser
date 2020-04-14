@@ -4,8 +4,9 @@ from bs4 import BeautifulSoup
 import requests as req
 
 username = "DreamerDeLy"
+year = "2020"
 
-resp = req.get("https://github.com/" + username + "?tab=overview&from=2020-01-01&to=2020-12-31")
+resp = req.get("https://github.com/" + username + "?tab=overview&from="+year+"-01-01&to="+year+"-12-31")
 soup = BeautifulSoup(resp.text, 'lxml')
 
 print("read page: \"" + soup.title.text + "\"")
@@ -16,7 +17,7 @@ commits = int(text.split()[0])
 # ------------------------------------------------------------------------------
 
 from datetime import date
-d0 = date(2020, 1, 1)
+d0 = date(int(year), 1, 1)
 d1 = date.today()
 day_number_1 = d1 - d0
 day_number = day_number_1.days
