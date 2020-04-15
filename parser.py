@@ -94,6 +94,38 @@ days_without_commits = day_number - days_with_commits
 
 # ------------------------------------------------------------------------------
 
+def createGraph(values, labels, max_value, forecast_value, forecast_index):
+	graph_str = ""
+
+	graph_p = 50
+
+	values_percent = list(values)
+
+	for i in range(len(values)):
+		values_percent[i] = values[i] / max_value
+
+	forecast_percent = forecast_value / max_value
+
+
+	for i in range(len(values)):
+		graph_str += "" + labels[i] + " "
+
+		for x in range(int(values_percent[i]*graph_p)):
+			graph_str += "■"
+
+		if ((i == forecast_index) & (forecast_value > 0)):
+			for x in range(int((forecast_percent - values_percent[i])*graph_p)):
+				graph_str += "□"
+
+		if values[i] > 0:
+			graph_str += " [" + str(round(values[i], 2)) + "]"
+		graph_str += "\n"
+
+	graph_str = graph_str[0:-1]
+	return graph_str
+
+# ------------------------------------------------------------------------------
+
 months = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 for i in range(len(dates)):
@@ -124,37 +156,13 @@ month_forecast = (months[int(today.month-1)]/month_day_number)*30
 
 # ------------------------------------------------------------------------------
 
-months_percent = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 months_name = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-mounts_percent_string = ""
-
-months_p = 50
 
 months_max_graph = months_max
 if (month_forecast > months_max_graph) & (int(year) == today.year):
 	months_max_graph = month_forecast
 
-for i in range(len(months)):
-	months_percent[i] = months[i] / months_max_graph
-
-month_forecast_percent = month_forecast / months_max_graph
-
-for i in range(len(months)):
-	mounts_percent_string += "" + months_name[i] + " "
-
-	for x in range(int(months_percent[i]*months_p)):
-		mounts_percent_string += "■"
-	
-	if (i == (today.month - 1)) & (int(year) == today.year):
-		for x in range(int((month_forecast_percent - months_percent[i])*months_p)):
-			mounts_percent_string += "□"
-	
-	if months[i] > 0:
-		mounts_percent_string += " [" + str(months[i]) + "]"
-
-	mounts_percent_string += "\n"
-
-mounts_percent_string = mounts_percent_string[0:-1]
+mounts_percent_string = createGraph(months, months_name, months_max_graph, month_forecast, int(today.month - 1))
 
 # ------------------------------------------------------------------------------
 
