@@ -2,11 +2,18 @@
 
 from bs4 import BeautifulSoup
 import requests as req
+import sys
 
 from datetime import date, datetime
 
 username = "DreamerDeLy"
 year = "2020"
+
+if (len(sys.argv) > 1): 
+	year = sys.argv[1]
+
+if (len(sys.argv) > 2): 
+	username = sys.argv[2]
 
 resp = req.get("https://github.com/" + username + "?tab=overview&from="+year+"-01-01&to="+year+"-12-31")
 soup = BeautifulSoup(resp.text, 'lxml')
