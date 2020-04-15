@@ -180,7 +180,12 @@ for y in range(0, 5):
 if commits_year_forecast > years_max:
 	years_max = commits_year_forecast
 
-years_percent_string = createGraph(years, years_name, years_max, commits_year_forecast, 4)
+years_percent_string = ""
+
+if (int(year) == today.year):
+	years_percent_string = createGraph(years, years_name, years_max, commits_year_forecast, 4)
+else:
+	years_percent_string = createGraph(years, years_name, years_max, 0, 0)
 
 # ------------------------------------------------------------------------------
 
