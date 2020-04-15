@@ -21,6 +21,7 @@ soup = BeautifulSoup(resp.text, 'lxml')
 print("read page: \"{0}\" ({1})".format(soup.title.text, year))
 
 text = soup.find('h2', 'f4 text-normal mb-2').text.strip()
+text = text.replace(',','')
 commits = int(text.split()[0])
 
 # ------------------------------------------------------------------------------
