@@ -109,6 +109,15 @@ for m in months:
 
 # ------------------------------------------------------------------------------
 
+weekdays = [0, 0, 0, 0, 0, 0, 0]
+
+for i in range(len(dates)):
+	dt = datetime.strptime(dates[i], '%Y-%m-%d')
+	wd = dt.weekday() 
+	weekdays[wd] += int(counts[i])
+
+# ------------------------------------------------------------------------------
+
 month_start = date(today.year, today.month, 1)
 month_day_number = (today - month_start).days + 1
 month_forecast = (months[int(today.month-1)]/month_day_number)*30
