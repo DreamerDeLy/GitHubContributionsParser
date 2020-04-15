@@ -15,6 +15,8 @@ if (len(sys.argv) > 1):
 if (len(sys.argv) > 2): 
 	username = sys.argv[2]
 
+print("Parsing user \"{0}\" ({1})".format(username, year))
+
 commits = parseSimpleYear(username, year)
 parseFullYear(username, year)
 
@@ -175,9 +177,10 @@ for y in range(0, 5):
 	if years[y] > years_max:
 		years_max = years[y]
 
-print(years)
+if commits_year_forecast > years_max:
+	years_max = commits_year_forecast
 
-years_percent_string = createGraph(years, years_name, years_max, 0, 0)
+years_percent_string = createGraph(years, years_name, years_max, commits_year_forecast, 4)
 
 # ------------------------------------------------------------------------------
 
