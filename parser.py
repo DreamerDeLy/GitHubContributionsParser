@@ -141,15 +141,6 @@ for m in months:
 
 # ------------------------------------------------------------------------------
 
-weekdays = [0, 0, 0, 0, 0, 0, 0]
-
-for i in range(len(dates)):
-	dt = datetime.strptime(dates[i], '%Y-%m-%d')
-	wd = dt.weekday() 
-	weekdays[wd] += int(counts[i])
-
-# ------------------------------------------------------------------------------
-
 month_start = date(today.year, today.month, 1)
 month_day_number = (today - month_start).days + 1
 month_forecast = (months[int(today.month-1)]/month_day_number)*30
@@ -162,7 +153,29 @@ months_max_graph = months_max
 if (month_forecast > months_max_graph) & (int(year) == today.year):
 	months_max_graph = month_forecast
 
-mounts_percent_string = createGraph(months, months_name, months_max_graph, month_forecast, int(today.month - 1))
+mf = 0
+if (int(year) == today.year):
+	mf = month_forecast
+
+mounts_percent_string = createGraph(months, months_name, months_max_graph, mf, int(today.month - 1))
+
+# ------------------------------------------------------------------------------
+
+weekdays = [0, 0, 0, 0, 0, 0, 0]
+weekdays_name = ["ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ", "НД"]
+
+for i in range(len(dates)):
+	dt = datetime.strptime(dates[i], '%Y-%m-%d')
+	wd = dt.weekday() 
+	weekdays[wd] += int(counts[i])
+
+weekday_max = 0
+
+for w in weekdays:
+	if (w > weekday_max): 
+		weekday_max = w
+
+weekdays_percent_string = createGraph(weekdays, weekdays_name, weekday_max, 0, 0)
 
 # ------------------------------------------------------------------------------
 
@@ -180,6 +193,9 @@ print("Commits forecast: \t" + str(round(commits_year_forecast)))
 print("---")
 print("Commits per months:")
 print(mounts_percent_string)
+print("---")
+print("Commits per weekdays:")
+print(weekdays_percent_string)
 print("---")
 print("\n")
 
