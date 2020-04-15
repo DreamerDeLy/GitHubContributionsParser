@@ -18,7 +18,7 @@ if (len(sys.argv) > 2):
 resp = req.get("https://github.com/" + username + "?tab=overview&from="+year+"-01-01&to="+year+"-12-31")
 soup = BeautifulSoup(resp.text, 'lxml')
 
-print("read page: \"" + soup.title.text + "\"")
+print("read page: \"{0}\" ({1})".format(soup.title.text, year))
 
 text = soup.find('h2', 'f4 text-normal mb-2').text.strip()
 commits = int(text.split()[0])
@@ -34,7 +34,7 @@ if (today.year != int(year)):
 	day_number = 365
 else:
 	day_number_1 = today - d0
-	day_number = day_number_1.days
+	day_number = day_number_1.days + 1
 
 commits_per_day = commits / day_number
 commits_year_forecast = commits_per_day * 365
@@ -169,7 +169,7 @@ mounts_percent_string = createGraph(months, months_name, months_max_graph, mf, i
 # ------------------------------------------------------------------------------
 
 weekdays = [0, 0, 0, 0, 0, 0, 0]
-weekdays_name = ["ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ", "НД"]
+weekdays_name = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 
 for i in range(len(dates)):
 	dt = datetime.strptime(dates[i], '%Y-%m-%d')
@@ -186,7 +186,7 @@ weekdays_percent_string = createGraph(weekdays, weekdays_name, weekday_max, 0, 0
 
 # ------------------------------------------------------------------------------
 
-print("\nANALITYCS")
+print("\nANALYTICS")
 print("Commits per year: \t"+str(commits))
 print("---")
 print("Max commits per day: \t{0} ({1})".format(commits_max, commits_max_day))
