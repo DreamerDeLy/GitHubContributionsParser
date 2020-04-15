@@ -94,7 +94,7 @@ def createGraph(values, labels, max_value, forecast_value, forecast_index):
 
 
 	for i in range(len(values)):
-		graph_str += "" + labels[i] + " "
+		graph_str += "" + str(labels[i]) + " "
 
 		for x in range(int(values_percent[i]*graph_p)):
 			graph_str += "■"
@@ -165,6 +165,22 @@ weekdays_percent_string = createGraph(weekdays, weekdays_name, weekday_max, 0, 0
 
 # ------------------------------------------------------------------------------
 
+years = [0, 0, 0, 0, 0]
+years_name = ["", "", "", "", ""]
+years_max = 0
+
+for y in range(0, 5):
+	years[y] = parseSimpleYear(username, 2016+y)
+	years_name[y] = str(2016 + y)
+	if years[y] > years_max:
+		years_max = years[y]
+
+print(years)
+
+years_percent_string = createGraph(years, years_name, years_max, 0, 0)
+
+# ------------------------------------------------------------------------------
+
 print("\nANALYTICS")
 print("Commits per year: \t"+str(commits))
 print("---")
@@ -182,6 +198,9 @@ print(mounts_percent_string)
 print("---")
 print("Commits per weekdays:")
 print(weekdays_percent_string)
+print("---")
+print("Commits per years:")
+print(years_percent_string)
 print("---")
 print("\n")
 
