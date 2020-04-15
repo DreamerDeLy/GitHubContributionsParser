@@ -1,7 +1,7 @@
 # GitHub Contributions parser by DreamerDeLy
 
-from bs4 import BeautifulSoup
-import requests as req
+from parse import *
+
 import sys
 
 from datetime import date, datetime
@@ -15,14 +15,8 @@ if (len(sys.argv) > 1):
 if (len(sys.argv) > 2): 
 	username = sys.argv[2]
 
-resp = req.get("https://github.com/" + username + "?tab=overview&from="+year+"-01-01&to="+year+"-12-31")
-soup = BeautifulSoup(resp.text, 'lxml')
-
-print("read page: \"{0}\" ({1})".format(soup.title.text, year))
-
-text = soup.find('h2', 'f4 text-normal mb-2').text.strip()
-text = text.replace(',','')
-commits = int(text.split()[0])
+commits = parseSimpleYear(username, year)
+parseFullYear(username, year)
 
 # ------------------------------------------------------------------------------
 
@@ -39,22 +33,6 @@ else:
 
 commits_per_day = commits / day_number
 commits_year_forecast = commits_per_day * 365
-
-# ------------------------------------------------------------------------------ 
-
-text_calendar = "" 
-add_text = "0"
-
-dates = []
-counts = []
-
-for tag in soup.find_all("rect", "day"):
-	#print("Date: {0}, Count: {1}".format(tag["data-date"], tag["data-count"]))
-	dates.append(tag["data-date"])
-	counts.append(tag["data-count"])
-
-#for i in range(len(dates)):
-#	print("Date: {0}, Count: {1}".format(dates[i], counts[i]))
 
 # ------------------------------------------------------------------------------
 
