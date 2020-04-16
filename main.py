@@ -249,6 +249,7 @@ print(result_string)
 if result_file != "":
 	with open(result_file, "w", encoding="utf-8") as file:
 		file.write("GitHub Contribution Parser by DeLy\n")
-		file.write("User: {0}\nRange: {1}-{2}\n".format(username, year_range_start, year))
-		file.write("Date: {0}\n\n".format(datetime.today().strftime("%Y-%m-%d %H:%M:%S.%f")))
+		file.write("User:\t{0}\n".format(username))
+		file.write("Range:\t{0}-{1}\n".format(year_range_start, year))
+		file.write("Date:\t{0}\n\n".format(datetime.today().strftime("%Y-%m-%d %H:%M:%S.%f")))
 		file.write(str(result_string))
