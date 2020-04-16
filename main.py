@@ -9,13 +9,34 @@ from datetime import date, datetime
 username = "DreamerDeLy"
 year = "2020"
 
-if (len(sys.argv) > 1): 
+year_range_start = 2015
+year_range_end = int(year)
+
+# ------------------------------------------------------------------------------
+
+if len(sys.argv) == 2: 
 	year = sys.argv[1]
 
 if (len(sys.argv) > 2): 
-	username = sys.argv[2]
+	for i in range(len(sys.argv)):
+		a = sys.argv[i]
 
-print("Parsing user \"{0}\" ({1})".format(username, year))
+		if a == "-y":
+			year = sys.argv[i+1]
+			year_range_end = int(year)
+			i += 1
+
+		if a == "-u":
+			username = sys.argv[i+1]
+			i += 1
+		
+		if a == "-sy":
+			year_range_start = int(sys.argv[i+1])
+			i += 1
+
+# ------------------------------------------------------------------------------
+
+print("Parsing user \"{0}\" ({1}-{2})".format(username, year_range_start, year))
 
 commits = parseSimpleYear(username, year)
 parseFullYear(username, year)
@@ -170,9 +191,6 @@ weekdays_percent_string = createGraph(weekdays, weekdays_name, weekday_max, 0, 0
 years = []
 years_name = []
 years_max = 0
-
-year_range_start = 2015
-year_range_end = 2020
 
 for y in range(year_range_start, year_range_end+1):
 	i = y - year_range_start
