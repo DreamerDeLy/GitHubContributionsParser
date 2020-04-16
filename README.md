@@ -1,10 +1,24 @@
 # GitHub Contributions parser
 ![license](https://img.shields.io/github/license/DreamerDeLy/GitHubContributionsParser)
 
-Simple contributions parser. A simple parser to quickly analyze the number of commits per year.
+Simple contributions parser. A script that parses the contributions calendar on a GitHub profile page and provides data analysis.
+
+## Features
+- Parse text with the number of commits
+- Parse data from calendar
+- Display graphs
+- Monthly / yearly forecast
 
 ## Arguments
-Args: `main.py [year] [username]`
+Simple version (uses standart username): 
+- `main.py [year]`
+
+All:
+- `-u [username]` username
+- `-sy [year]` start year for analysis (2015)
+- `-y [year]` base year (2020)
+
+Example: `/main.py -u AlexGyver -sy 2010`
 
 ## Output:
 ```
