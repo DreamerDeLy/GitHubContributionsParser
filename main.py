@@ -167,15 +167,22 @@ weekdays_percent_string = createGraph(weekdays, weekdays_name, weekday_max, 0, 0
 
 # ------------------------------------------------------------------------------
 
-years = [0, 0, 0, 0, 0]
-years_name = ["", "", "", "", ""]
+years = []
+years_name = []
 years_max = 0
 
-for y in range(0, 5):
-	years[y] = parseSimpleYear(username, 2016+y)
-	years_name[y] = str(2016 + y)
-	if years[y] > years_max:
-		years_max = years[y]
+year_range_start = 2015
+year_range_end = 2020
+
+for y in range(year_range_start, year_range_end+1):
+	i = y - year_range_start
+
+	commits_year = parseSimpleYear(username, y) 
+	years.append(commits_year)
+	years_name.append(str(y))
+
+	if commits_year > years_max:
+		years_max = commits_year
 
 if commits_year_forecast > years_max:
 	years_max = commits_year_forecast
@@ -183,7 +190,7 @@ if commits_year_forecast > years_max:
 years_percent_string = ""
 
 if (int(year) == today.year):
-	years_percent_string = createGraph(years, years_name, years_max, commits_year_forecast, 4)
+	years_percent_string = createGraph(years, years_name, years_max, commits_year_forecast, len(years)-1)
 else:
 	years_percent_string = createGraph(years, years_name, years_max, 0, 0)
 
