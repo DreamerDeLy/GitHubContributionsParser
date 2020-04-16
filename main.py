@@ -228,7 +228,7 @@ result_string += "Max commits per day: \t{0} ({1}) \n".format(commits_max, commi
 result_string += "Longest streak: \t{0} ({1}) \n".format(longest_streak, longest_streak_date)
 result_string += "---\n"
 result_string += "Days with commits: \t{0} ({1}%) \n".format(days_with_commits, round((days_with_commits/day_number)*100, 2))
-result_string += "Days without commits: \t{0} ({1}% \n)".format(days_without_commits, round((days_without_commits/day_number)*100, 2))
+result_string += "Days without commits: \t{0} ({1}%) \n".format(days_without_commits, round((days_without_commits/day_number)*100, 2))
 result_string += "---\n"
 result_string += "Commits per day: \t" + str(round(commits_per_day, 2)) + "\n"
 result_string += "Commits forecast: \t" + str(round(commits_year_forecast)) + "\n"
@@ -250,5 +250,5 @@ if result_file != "":
 	with open(result_file, "w", encoding="utf-8") as file:
 		file.write("GitHub Contribution Parser by DeLy\n")
 		file.write("User: {0}\nRange: {1}-{2}\n".format(username, year_range_start, year))
-		file.write("Date: {0}\n".format(today.strftime("%Y-%m-%d %H:%M:%S.%f")))
+		file.write("Date: {0}\n\n".format(datetime.today().strftime("%Y-%m-%d %H:%M:%S.%f")))
 		file.write(str(result_string))
