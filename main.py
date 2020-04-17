@@ -11,6 +11,7 @@ username = "DreamerDeLy"
 year = "2020"
 
 result_file = ""
+data_file = ""
 
 year_range_start = 2015
 year_range_end = int(year)
@@ -39,6 +40,10 @@ if (len(sys.argv) > 2):
 
 		if a == "-s":
 			result_file = sys.argv[i+1]
+			i += 1
+		
+		if a == "-sd":
+			data_file = sys.argv[i+1]
 			i += 1
 
 # ------------------------------------------------------------------------------
@@ -247,9 +252,17 @@ print("\n")
 print(result_string)
 
 if result_file != "":
+	print("Saving result")
 	with open(result_file, "w", encoding="utf-8") as file:
 		file.write("GitHub Contribution Parser by DeLy\n")
 		file.write("User:\t{0}\n".format(username))
 		file.write("Range:\t{0}-{1}\n".format(year_range_start, year))
 		file.write("Date:\t{0}\n\n".format(datetime.today().strftime("%Y-%m-%d %H:%M:%S.%f")))
 		file.write(str(result_string))
+
+if data_file != "":
+	print("Saving data")
+	with open(data_file, "w", encoding="utf-8") as file:
+		file.write("\"date\", \"commits\"\n")
+		for i in range(len(dates)):
+			file.write("{0},{1}\n".format(dates[i], counts[i]))

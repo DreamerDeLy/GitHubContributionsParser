@@ -19,6 +19,7 @@ All:
 - `-sy [year]` start year for analysis (2015)
 - `-y [year]` base year (2020)
 - `-s [path]` path to saving analytics to file
+- `-sd [path]` path to saving data to file
 
 Example: `/main.py -u AlexGyver -sy 2010`
 
