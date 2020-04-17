@@ -8,6 +8,7 @@ Simple contributions parser. A script that parses the contributions calendar on 
 - Parse data from calendar
 - Display graphs
 - Monthly / yearly forecast
+- Saving results to file
 
 ## Arguments
 Simple version (uses standart username): 
@@ -23,7 +24,7 @@ Example: `/main.py -u AlexGyver -sy 2010`
 
 ## Output:
 ```
-> main.py 2020 ivankravets
+> main.py -y 2020 -u ivankravets
 
 Parsing user "ivankravets" (2020)
 
