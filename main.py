@@ -244,7 +244,7 @@ result_string += "---\n"
 result_string += "Commits per weekdays:\n"
 result_string += weekdays_percent_string + "\n"
 result_string += "---\n"
-result_string += "Commits per years:"
+result_string += "Commits per years:\n"
 result_string += years_percent_string + "\n"
 result_string += "---\n"
 
